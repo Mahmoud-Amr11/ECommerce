@@ -31,7 +31,7 @@ namespace ECommerce
            var dataSeeding=Scope.ServiceProvider.GetRequiredService<IDataSeeding>();
 
 
-            dataSeeding.SeedData();
+            dataSeeding.SeedDataAsync();
 
 
             // Configure the HTTP request pipeline.
