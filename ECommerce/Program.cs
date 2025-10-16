@@ -3,6 +3,7 @@ using DomainLayer.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.Data.Contexts;
+using Service.MappingProfiles;
 
 namespace ECommerce
 {
@@ -23,6 +24,11 @@ namespace ECommerce
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
+
+
+
+
+            builder.Services.AddAutoMapper(config => config.AddProfile(new ProductProfile()));
 
             var app = builder.Build();
 
