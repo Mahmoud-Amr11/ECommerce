@@ -35,7 +35,7 @@ namespace ECommerce
 
 
 
-            builder.Services.AddAutoMapper(config => config.AddProfile(new ProductProfile()));
+            builder.Services.AddAutoMapper(config => config.AddProfile(new ProductProfile()),typeof(AssemblyReference).Assembly);
 
             var app = builder.Build();
 
@@ -55,6 +55,7 @@ namespace ECommerce
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
