@@ -1,12 +1,6 @@
 ﻿using DomainLayer.Contracts;
 using DomainLayer.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Persistence.Data.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
