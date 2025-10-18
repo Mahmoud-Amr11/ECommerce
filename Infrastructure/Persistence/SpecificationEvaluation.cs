@@ -13,6 +13,14 @@ namespace Persistence
             {
                 query = query.Where(specification.Criteria);
             }
+            if(specification.OrderBy !=null)
+            {
+                query = query.OrderBy(specification.OrderBy);
+            }
+            if(specification.OrderByDescending !=null)
+            {
+                query = query.OrderByDescending(specification.OrderByDescending);
+            }
             if (specification.IncludeExpression != null && specification.IncludeExpression.Any())
             {
 
