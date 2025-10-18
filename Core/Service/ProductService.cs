@@ -3,6 +3,7 @@ using DomainLayer.Contracts;
 using DomainLayer.Models;
 using ServiceAbstraction;
 using Shared.DataTransferObject;
+using Service.Specifications;
 
 namespace Service
 {
@@ -12,15 +13,16 @@ namespace Service
 
         public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
         {
+            var specification = new ProductWithBrandAndTypeSpecification();
             var repo= _unitOfWork.GetRepository<Product,int>();
-            var products=await repo.GetAllAsync();
+            var products=await repo.GetAllAsync(specification);
             var productsDto= _mapper.Map<IEnumerable<ProductDto>>(products);
             return productsDto;
         }
         public async Task<ProductDto?> GetProductByIdAsync(int id)
         {
-            
-            var Product=await  _unitOfWork.GetRepository<Product,int>().GetByIdAsync(id);
+            var specification = new ProductWithBrandAndTypeSpecification(id);
+            var Product=await  _unitOfWork.GetRepository<Product,int>().GetByIdAsync(specification);
             return  Product is null ? null : _mapper.Map<ProductDto>(Product);
         }
 

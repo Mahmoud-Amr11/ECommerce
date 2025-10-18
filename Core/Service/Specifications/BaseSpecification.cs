@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Service.Specifications
 {
-    internal class BaseSpecification<TEntity, TKey> : ISpecification<TEntity, TKey> where TEntity : BaseEntity<TKey>
+    public class BaseSpecification<TEntity, TKey> : ISpecification<TEntity, TKey> where TEntity : BaseEntity<TKey>
     {
         public Expression<Func<TEntity, bool>>? Criteria { get;  private set; }
         public BaseSpecification(Expression<Func<TEntity, bool>>? criteria)
