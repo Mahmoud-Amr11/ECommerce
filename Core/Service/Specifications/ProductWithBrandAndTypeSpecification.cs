@@ -13,8 +13,10 @@ namespace Service.Specifications
         }
 
         //Get All including Brand and Type
-        public ProductWithBrandAndTypeSpecification()
-            : base(null)
+        public ProductWithBrandAndTypeSpecification(int? brandId, int? typeId)
+            : base(p=> (!brandId.HasValue || p.BrandId==brandId)
+            &&
+            (!typeId.HasValue || p.TypeId==typeId))
         {
             AddInclude(p => p.ProductType);
             AddInclude(p => p.ProductBrand);
