@@ -14,15 +14,18 @@ namespace Service.Specifications
         }
 
         //Get All including Brand and Type
-        public ProductWithBrandAndTypeSpecification(int? brandId, int? typeId,ProductSortingOption? sortingOption)
-            : base(p=> (!brandId.HasValue || p.BrandId==brandId)
+        public ProductWithBrandAndTypeSpecification(ProductQueryParams productQueryParams)
+            : base(p => (!productQueryParams.brandId.HasValue || p.BrandId == productQueryParams.brandId)
             &&
-            (!typeId.HasValue || p.TypeId==typeId))
+            (!productQueryParams.typeId.HasValue || p.TypeId == productQueryParams.typeId)
+            &&
+            (string.IsNullOrWhiteSpace(productQueryParams.searchTerm) || p.Name.ToLower().Contains(productQueryParams.searchTerm.ToLower()))
+            )
         {
             AddInclude(p => p.ProductType);
             AddInclude(p => p.ProductBrand);
 
-            switch (sortingOption)
+            switch (productQueryParams.sortingOption)
             {
                 case ProductSortingOption.PriceAsc:
                     AddOrderBy(p => p.Price);

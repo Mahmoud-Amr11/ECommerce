@@ -12,9 +12,9 @@ namespace Service
     {
  
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(int? brandId,int? typeId,ProductSortingOption? sortingOption)
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(ProductQueryParams productQueryParams)
         {
-            var specification = new ProductWithBrandAndTypeSpecification(brandId,typeId, sortingOption);
+            var specification = new ProductWithBrandAndTypeSpecification( productQueryParams);
             var repo= _unitOfWork.GetRepository<Product,int>();
             var products=await repo.GetAllAsync(specification);
             var productsDto= _mapper.Map<IEnumerable<ProductDto>>(products);

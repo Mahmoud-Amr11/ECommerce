@@ -23,9 +23,7 @@ namespace Persistence
             }
             if (specification.IncludeExpression != null && specification.IncludeExpression.Any())
             {
-
                 query = specification.IncludeExpression.Aggregate(query, (current, include) => current.Include(include));
-
             }
             return query;
         }
