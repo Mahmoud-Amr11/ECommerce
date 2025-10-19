@@ -12,13 +12,21 @@ namespace Service
     {
  
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(ProductQueryParams productQueryParams)
+        public async Task<PaginationResult<ProductDto>> GetAllProductsAsync(ProductQueryParams productQueryParams)
         {
             var specification = new ProductWithBrandAndTypeSpecification( productQueryParams);
             var repo= _unitOfWork.GetRepository<Product,int>();
             var products=await repo.GetAllAsync(specification);
             var productsDto= _mapper.Map<IEnumerable<ProductDto>>(products);
-            return productsDto;
+            var productCount=productsDto.Count();
+            var paginationResult = new PaginationResult<ProductDto>
+            {
+                PageIndex = productQueryParams.PageIndex,
+                PageSize = productCount,
+                TotalItems =0,
+                Data = productsDto
+            };
+            return paginationResult;
         }
         public async Task<ProductDto?> GetProductByIdAsync(int id)
         {
