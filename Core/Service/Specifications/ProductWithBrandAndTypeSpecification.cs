@@ -15,9 +15,9 @@ namespace Service.Specifications
 
         //Get All including Brand and Type
         public ProductWithBrandAndTypeSpecification(ProductQueryParams productQueryParams)
-            : base(p => (!productQueryParams.brandId.HasValue || p.BrandId == productQueryParams.brandId)
+            : base(p => (!productQueryParams.brandId.HasValue || p.BrandId == productQueryParams.brandId.Value)
             &&
-            (!productQueryParams.typeId.HasValue || p.TypeId == productQueryParams.typeId)
+            (!productQueryParams.typeId.HasValue || p.TypeId == productQueryParams.typeId.Value)
             &&
             (string.IsNullOrWhiteSpace(productQueryParams.searchTerm) || p.Name.ToLower().Contains(productQueryParams.searchTerm.ToLower()))
             )
@@ -39,10 +39,11 @@ namespace Service.Specifications
                 case ProductSortingOption.NameAsc:
                     AddOrderBy(p => p.Name);
                     break;
-                default:
-                    AddOrderBy(p => p.Name);
+                default:              
                     break;
             }
+
+            ApplyPagination(productQueryParams.PageIndex, productQueryParams.PageSize);
         }
     }
 }

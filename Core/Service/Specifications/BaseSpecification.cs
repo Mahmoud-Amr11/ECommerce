@@ -22,7 +22,7 @@ namespace Service.Specifications
         #endregion
 
 
-        #region Order
+        #region Sorting
 
         public Expression<Func<TEntity, object>> OrderBy { get; private set; }
         public Expression<Func<TEntity, object>> OrderByDescending { get; private set; }
@@ -38,6 +38,22 @@ namespace Service.Specifications
         }
         #endregion
 
+        #region Pagination
+        public int Take{ get; private set; }
+        public int Skip { get; private set; }
+        public bool IsPagingEnabled { get; private set; } 
+
+        protected void ApplyPagination(int pageIndex, int pageSize)
+        {
+            Skip = (pageIndex - 1) * pageSize;
+            Take = pageSize;
+            IsPagingEnabled = true;
+        }
+
+
+
+
+        #endregion
 
     }
 }

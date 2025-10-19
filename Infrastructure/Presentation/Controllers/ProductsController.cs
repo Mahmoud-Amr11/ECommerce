@@ -13,7 +13,7 @@ namespace Presentation.Controllers
     {
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProduct(ProductQueryParams productQueryParams )
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProduct([FromQuery]ProductQueryParams productQueryParams )
         {
             var products = await _serviceManager.ProductService.GetAllProductsAsync(productQueryParams);
             return Ok(products);
