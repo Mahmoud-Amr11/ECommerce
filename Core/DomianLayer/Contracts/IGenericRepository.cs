@@ -10,5 +10,9 @@ namespace DomainLayer.Contracts
         void Update(TEntity entity);
         void Remove(TEntity entity);
 
+
+        Task<IReadOnlyList<TEntity>> GetAllAsync(ISpecification<TEntity,TKey> specification);
+        Task<TEntity?> GetByIdAsync(ISpecification<TEntity,TKey> specification);
+
     }
 }
