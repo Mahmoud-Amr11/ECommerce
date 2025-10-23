@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ServiceAbstraction;
 using Shared;
 using Shared.DataTransferObject;
@@ -44,8 +42,6 @@ namespace Presentation.Controllers
             var types = await _serviceManager.ProductService.GetAllTypesAsync();
 
             return Ok(types);
-
-
         }
     }
 }

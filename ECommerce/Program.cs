@@ -1,5 +1,6 @@
 
 using DomainLayer.Contracts;
+using ECommerce.Web.CustomMiddleware;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.Data.Contexts;
@@ -29,6 +30,7 @@ namespace ECommerce
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            
 
             builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
@@ -45,6 +47,8 @@ namespace ECommerce
 
 
             dataSeeding.SeedDataAsync();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 
             // Configure the HTTP request pipeline.
