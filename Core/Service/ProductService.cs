@@ -5,6 +5,7 @@ using ServiceAbstraction;
 using Shared.DataTransferObject;
 using Service.Specifications;
 using Shared;
+using DomainLayer.Exceptions;
 
 namespace Service
 {
@@ -31,8 +32,10 @@ namespace Service
         public async Task<ProductDto?> GetProductByIdAsync(int id)
         {
             var specification = new ProductWithBrandAndTypeSpecification(id);
-            var Product=await  _unitOfWork.GetRepository<Product,int>().GetByIdAsync(specification);
-            return  Product is null ? null : _mapper.Map<ProductDto>(Product);
+            var product=await  _unitOfWork.GetRepository<Product,int>().GetByIdAsync(specification);
+            if(product is null)
+                throw new ProductNotFoundException(id);
+            return  product is null ? null : _mapper.Map<ProductDto>(product);
         }
 
         public async Task<IEnumerable<TypeDto>> GetAllTypesAsync()

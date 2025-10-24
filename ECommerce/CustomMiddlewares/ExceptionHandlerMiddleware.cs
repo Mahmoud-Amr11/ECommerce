@@ -1,4 +1,5 @@
-﻿using Shared.ErrorModels;
+﻿using DomainLayer.Exceptions;
+using Shared.ErrorModels;
 
 namespace ECommerce.Web.CustomMiddleware
 {
@@ -20,6 +21,20 @@ namespace ECommerce.Web.CustomMiddleware
             try
             {
                 await _next(httpContext);
+
+                //Response
+                if(httpContext.Response.StatusCode== StatusCodes.Status404NotFound)
+                {
+                    _logger.LogWarning("Resource not found: {Path}", httpContext.Request.Path);
+                    var notFound = new ErrorToReturn()
+                    {
+                        StatusCode = StatusCodes.Status404NotFound,
+                        Message = $"The resource {httpContext.Request.Path} you are looking for does not exist"
+                    };
+
+                    await httpContext.Response.WriteAsJsonAsync(notFound);
+                }
+              
             }
             catch (Exception ex)
             {
@@ -27,7 +42,12 @@ namespace ECommerce.Web.CustomMiddleware
 
                 httpContext.Response.ContentType = "application/json";
 
-                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                httpContext.Response.StatusCode = ex switch
+                {
+                    NotFoundException => StatusCodes.Status404NotFound,
+                    _ => StatusCodes.Status500InternalServerError
+
+                };
 
 
                 var errorToReturn =new ErrorToReturn()
