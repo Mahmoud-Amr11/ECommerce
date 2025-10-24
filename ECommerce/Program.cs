@@ -1,7 +1,10 @@
 
 using DomainLayer.Contracts;
 using ECommerce.Web.CustomMiddleware;
+using ECommerce.Web.Factories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Validations;
 using Persistence;
 using Persistence.Data.Contexts;
 using Persistence.Repositories;
@@ -30,7 +33,12 @@ namespace ECommerce
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddScoped<IProductService, ProductService>();
-            
+            builder.Services.Configure<ApiBehaviorOptions>((options) =>
+            {
+                options.InvalidModelStateResponseFactory = ApiResponseFactory.GenerateApiValidationErrorResponse;
+
+            });
+
 
             builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
