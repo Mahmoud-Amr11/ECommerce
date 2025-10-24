@@ -1,6 +1,7 @@
 
 using DomainLayer.Contracts;
 using ECommerce.Web.CustomMiddleware;
+using ECommerce.Web.Extensions;
 using ECommerce.Web.Factories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,50 +12,29 @@ using Persistence.Repositories;
 using Service;
 using Service.MappingProfiles;
 using ServiceAbstraction;
+using System.Threading.Tasks;
 
 namespace ECommerce
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<StoreDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
-            builder.Services.AddScoped<IDataSeeding, DataSeeding>();
-            builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
-            builder.Services.AddScoped<IProductService, ProductService>();
-            builder.Services.Configure<ApiBehaviorOptions>((options) =>
-            {
-                options.InvalidModelStateResponseFactory = ApiResponseFactory.GenerateApiValidationErrorResponse;
 
-            });
+            builder.Services.AddApplicationApiService();
+            builder.Services.AddSwaggerServices();
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddApplicationService();
 
-
-            builder.Services.AddScoped<IServiceManager, ServiceManager>();
-
-
-
-
-            builder.Services.AddAutoMapper(config => config.AddProfile(new ProductProfile()),typeof(AssemblyReference).Assembly);
 
             var app = builder.Build();
 
-
-           var Scope= app.Services.CreateScope();
-           var dataSeeding=Scope.ServiceProvider.GetRequiredService<IDataSeeding>();
-
-
-            dataSeeding.SeedDataAsync();
+            await app.SeedingData();
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 
