@@ -1,18 +1,7 @@
-
-using DomainLayer.Contracts;
 using ECommerce.Web.CustomMiddleware;
 using ECommerce.Web.Extensions;
-using ECommerce.Web.Factories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Validations;
 using Persistence;
-using Persistence.Data.Contexts;
-using Persistence.Repositories;
 using Service;
-using Service.MappingProfiles;
-using ServiceAbstraction;
-using System.Threading.Tasks;
 
 namespace ECommerce
 {

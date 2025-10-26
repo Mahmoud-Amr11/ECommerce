@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using DomainLayer.Contracts;
-using DomainLayer.Models;
 using ServiceAbstraction;
 using Shared.DataTransferObject;
 using Service.Specifications;
 using Shared;
 using DomainLayer.Exceptions;
+using DomainLayer.Models.ProductModule;
 
 namespace Service
 {
