@@ -1,4 +1,4 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Models.ProductModule;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Data.Contexts
