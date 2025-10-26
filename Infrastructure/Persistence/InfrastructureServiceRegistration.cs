@@ -16,7 +16,7 @@ namespace Persistence
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-           services.AddScoped<IDataSeeding, DataSeeding>();
+            services.AddScoped<IDataSeeding, DataSeeding>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddSingleton<IConnectionMultiplexer>(

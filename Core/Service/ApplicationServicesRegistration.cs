@@ -1,17 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Service.MappingProfiles;
 using ServiceAbstraction;
+using System.Reflection;
 
 namespace Service
 {
     public static class ApplicationServicesRegistration
     {
-        public static IServiceCollection AddApplicationService(this IServiceCollection service)
+        public static IServiceCollection AddApplicationService(this IServiceCollection services)
         {
 
-            service.AddScoped<IServiceManager, ServiceManager>();
-            service.AddAutoMapper(config => config.AddProfile(new ProductProfile()), typeof(AssemblyReference).Assembly);
-            return service;
+            services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddAutoMapper(config => config.AddProfile(new ProductProfile()), typeof(AssemblyReference).Assembly);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            return services;
         }
     }
 }
