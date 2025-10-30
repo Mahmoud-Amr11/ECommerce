@@ -12,7 +12,8 @@ namespace ECommerce.Web.Extensions
             var dataSeeding = Scope.ServiceProvider.GetRequiredService<IDataSeeding>();
 
 
-           await dataSeeding.SeedDataAsync();
+              await dataSeeding.SeedDataAsync();
+              await dataSeeding.IdentitySeedDataAsync();
             return app;
         }
     }
