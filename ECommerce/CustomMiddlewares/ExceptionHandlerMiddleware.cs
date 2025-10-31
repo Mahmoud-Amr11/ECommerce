@@ -29,6 +29,7 @@ namespace ECommerce.Web.CustomMiddleware
                     var notFound = new ErrorToReturn()
                     {
                         StatusCode = StatusCodes.Status404NotFound,
+
                         Message = $"The resource {httpContext.Request.Path} you are looking for does not exist"
                     };
 
@@ -45,6 +46,8 @@ namespace ECommerce.Web.CustomMiddleware
                 httpContext.Response.StatusCode = ex switch
                 {
                     NotFoundException => StatusCodes.Status404NotFound,
+                    UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
+                    BadRequestException => StatusCodes.Status400BadRequest,
                     _ => StatusCodes.Status500InternalServerError
 
                 };
@@ -55,7 +58,13 @@ namespace ECommerce.Web.CustomMiddleware
                     StatusCode = httpContext.Response.StatusCode,
                     Message = _environment.IsDevelopment()
                                 ? ex.Message
-                                : "An internal server error occurred"
+                                : "An internal server error occurred",
+                   Errors = ex switch
+                   {
+                    BadRequestException badRequestException => badRequestException.Errors,
+                    _ => null
+                   }
+
                 };
 
 

@@ -1,8 +1,10 @@
-﻿namespace Shared.ErrorModels
+﻿
+namespace Shared.ErrorModels
 {
     public class ErrorToReturn
     {
         public int StatusCode{ get; set; }
         public string Message { get; set; } = string.Empty;
+        public List<string>? Errors { get; set; }
     }
 }
