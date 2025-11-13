@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceAbstraction;
 using Shared.IdentityDto;
+using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
@@ -11,16 +12,16 @@ namespace Presentation.Controllers
 
 
         [HttpPost("Login")]
-        public ActionResult<UserDto> Login(LoginDto request)
+        public async Task<ActionResult<UserDto>> LoginAsync(LoginDto request)
         {
-             var user=_serviceManager.AuthenticationService.LoginAsync(request);
+             var user=await _serviceManager.AuthenticationService.LoginAsync(request);
                 return Ok(user);
         }
 
         [HttpPost("Register")]
-        public ActionResult<UserDto> Register(RegisterDto request)
+        public async Task<ActionResult<UserDto>> Register(RegisterDto request)
         {
-            var user = _serviceManager.AuthenticationService.RegisterAsync(request);
+            var user =await _serviceManager.AuthenticationService.RegisterAsync(request);
             return Ok(user);
             
         }

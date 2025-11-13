@@ -19,6 +19,7 @@ namespace ECommerce
             builder.Services.AddSwaggerServices();
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddApplicationService();
+            builder.Services.AddJWTService(builder.Configuration);
 
 
             var app = builder.Build();
@@ -37,7 +38,7 @@ namespace ECommerce
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

@@ -33,7 +33,7 @@ namespace Service
                 {
                     Email = user.Email,
                     DisplayName = user.DisplayName,
-                    Token = "This is a token"
+                    Token =await CreateTokenAsync(user)
                 };
             }
             throw new UnauthorizedAccessException();
@@ -78,7 +78,7 @@ namespace Service
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
-            var secretKey = _configuration.GetSection("JwtSettings")["SecretKey"];
+            var secretKey = _configuration.GetSection("JWTOptions")["SecretKey"];
            var key= new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -87,8 +87,8 @@ namespace Service
                 claims:claims,
                 expires:DateTime.UtcNow.AddHours(1),
                 signingCredentials:creds,
-                issuer:_configuration.GetSection("JwtSettings")["Issuer"],
-                audience:_configuration.GetSection("JwtSettings")["Audience"]
+                issuer:_configuration.GetSection("JWTOptions")["Issuer"],
+                audience:_configuration.GetSection("JWTOptions")["Audience"]
 
             );
             var tokenHandler = new JwtSecurityTokenHandler();
