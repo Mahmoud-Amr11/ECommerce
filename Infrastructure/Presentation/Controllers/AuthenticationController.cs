@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceAbstraction;
 using Shared.IdentityDto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
@@ -16,7 +11,7 @@ namespace Presentation.Controllers
 
 
         [HttpPost("Login")]
-        public ActionResult<UserDto> Login( LoginDto request)
+        public ActionResult<UserDto> Login(LoginDto request)
         {
              var user=_serviceManager.AuthenticationService.LoginAsync(request);
                 return Ok(user);
@@ -27,6 +22,7 @@ namespace Presentation.Controllers
         {
             var user = _serviceManager.AuthenticationService.RegisterAsync(request);
             return Ok(user);
+            
         }
     }
 }
