@@ -29,6 +29,8 @@ namespace Service
             };
             return paginationResult;
         }
+
+
         public async Task<ProductDto?> GetProductByIdAsync(int id)
         {
             var specification = new ProductWithBrandAndTypeSpecification(id);
@@ -38,6 +40,7 @@ namespace Service
             return  product is null ? null : _mapper.Map<ProductDto>(product);
         }
 
+
         public async Task<IEnumerable<TypeDto>> GetAllTypesAsync()
         {
             var productTypes=await _unitOfWork.GetRepository<ProductType, int>().GetAllAsync();
@@ -45,7 +48,7 @@ namespace Service
             return productTypesDto;
         }
 
-
+        
 
         public async Task<IEnumerable<BrandDto>> GetAllBrandsAsync()
         {

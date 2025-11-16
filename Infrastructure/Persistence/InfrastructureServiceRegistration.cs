@@ -1,4 +1,6 @@
 ﻿using DomainLayer.Contracts;
+using DomainLayer.Models.IdentityModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +36,9 @@ namespace Persistence
                 );
 
 
+            services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<StoreIdentityDbContext>();
 
 
             return services;

@@ -1,18 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DomainLayer.Models.IdentityModels
+namespace Shared.IdentityDto
 {
-    public class Address 
+    public class AddressDto
     {
-        public int Id { get; set; }
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;
         public string Street { get; set; } = default!;
         public string City { get; set; } = default!;
         public string Country { get; set; } = default!;
-        [ForeignKey(nameof(User))]
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
-
     }
 }

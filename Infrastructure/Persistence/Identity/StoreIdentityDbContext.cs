@@ -2,11 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.Identity
 {
@@ -23,8 +18,6 @@ namespace Persistence.Identity
             builder.Ignore<IdentityUserLogin<string>>();
             builder.Ignore<IdentityUserToken<string>>();
             builder.Ignore<IdentityUserClaim<string>>();
-
-
         }
     }
 }
