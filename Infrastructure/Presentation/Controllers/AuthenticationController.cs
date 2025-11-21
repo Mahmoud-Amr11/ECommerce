@@ -61,5 +61,12 @@ namespace Presentation.Controllers
             var user = await _serviceManager.AuthenticationService.UpdateUserAddressAsync(email, address);
             return Ok(user);
         }
+
+
+        public IActionResult Index()
+        {
+            return Ok("Authentication Controller is working!");
+
+        }
     }
 }
