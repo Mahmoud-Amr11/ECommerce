@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.Configuration.Annotations;
 using DomainLayer.Exceptions;
 using DomainLayer.Models.IdentityModels;
 using Microsoft.AspNetCore.Identity;
@@ -8,13 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ServiceAbstraction;
 using Shared.IdentityDto;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Service
 {
