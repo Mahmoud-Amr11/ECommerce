@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceAbstraction;
-using Shared.IdentityDto;
+using Shared.DataTransferObject.IdentityDto;
 using System.Security.Claims;
 
 namespace Presentation.Controllers

@@ -4,6 +4,19 @@ namespace DomainLayer.Models.OrderModules
 {
     public class Order:BaseEntity<Guid>
     {
+        public Order()
+        {
+            
+        }
+        public Order(string userEmail, OrderAddress address, DeliveryMethod deliveryMethod, ICollection<OrderItem> items, decimal subTotal)
+        {
+            UserEmail = userEmail;           
+            Address = address;
+            DeliveryMethod=deliveryMethod;
+            Items = items;
+            SubTotal = subTotal;
+        }
+
         public string UserEmail { get; set; } = default!;
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
         public OrderAddress Address { get; set; } = default!;
