@@ -63,10 +63,6 @@ namespace Presentation.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            return Ok("Authentication Controller is working!");
-
-        }
+       
     }
 }

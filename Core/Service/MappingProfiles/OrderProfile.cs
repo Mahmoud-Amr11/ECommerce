@@ -2,11 +2,6 @@
 using DomainLayer.Models.OrderModules;
 using Shared.DataTransferObject.IdentityDto;
 using Shared.DataTransferObject.OrderDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.MappingProfiles
 {
@@ -14,9 +9,16 @@ namespace Service.MappingProfiles
     {
         public OrderProfile()
         {
-            CreateMap<AddressDto, OrderAddress>();
-            CreateMap<Order, OrderToReturnDto>();
-               
+            CreateMap<AddressDto, OrderAddress>().ReverseMap();
+
+            CreateMap<Order, OrderToReturnDto>()
+                .ForMember(dist=>dist.DeliveryMethod, opt=>opt.MapFrom(src=>src.DeliveryMethod.ShortName))             ;
+
+            CreateMap<OrderItem, OrderItemDto>()
+               .ForMember(dist => dist.ProductName, options => options.MapFrom(src => src.Product.ProductName))
+               .ForMember(dist => dist.PictureUrl, options => options.MapFrom<OrderItemPictureResolver>());
+
+            CreateMap<DeliveryMethod, DeliveryMethodDto>();
 
         }
     }

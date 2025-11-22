@@ -11,5 +11,10 @@ namespace ServiceAbstraction
     {
         Task<OrderToReturnDto> CreateOrderAsync(string userEmail, OrderDto orderDto);
 
+        Task<IEnumerable<DeliveryMethodDto>> GetDeliveryMethodsAsync();
+
+        Task<IEnumerable<OrderToReturnDto>> GetAllOrdersAsync(string userEmail);
+        Task<OrderToReturnDto> GetOrderByIdAsync(Guid id);
+
     }
 }

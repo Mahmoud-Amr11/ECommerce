@@ -5,6 +5,7 @@ using DomainLayer.Models.BasketModule;
 using DomainLayer.Models.IdentityModels;
 using DomainLayer.Models.OrderModules;
 using DomainLayer.Models.ProductModule;
+using Service.Specifications;
 using ServiceAbstraction;
 using Shared.DataTransferObject.IdentityDto;
 using Shared.DataTransferObject.OrderDtos;
@@ -61,6 +62,26 @@ namespace Service
           
             await _unitOfWork.SaveChangesAsync();
 
+            return _mapper.Map<OrderToReturnDto>(order);
+        }
+
+        public async Task<IEnumerable<OrderToReturnDto>> GetAllOrdersAsync(string userEmail)
+        {
+             var spec=new OrderSpecification(userEmail);
+             var orders=await _unitOfWork.GetRepository<Order,Guid>().GetAllAsync(spec);
+            return _mapper.Map<IEnumerable<OrderToReturnDto>>(orders);
+        }
+
+        public async Task<IEnumerable<DeliveryMethodDto>> GetDeliveryMethodsAsync()
+        {
+            var deliveryMethods=await _unitOfWork.GetRepository<DeliveryMethod,int>().GetAllAsync();
+            return _mapper.Map<IEnumerable<DeliveryMethodDto>>(deliveryMethods);
+        }
+
+        public async Task<OrderToReturnDto> GetOrderByIdAsync(Guid id)
+        {
+            var spec=new OrderSpecification(id);
+            var order=await _unitOfWork.GetRepository<Order,Guid>().GetByIdAsync(spec);
             return _mapper.Map<OrderToReturnDto>(order);
         }
     }
