@@ -1,4 +1,4 @@
-﻿namespace Shared.IdentityDto
+﻿namespace Shared.DataTransferObject.IdentityDto
 {
     public class UserDto {
 

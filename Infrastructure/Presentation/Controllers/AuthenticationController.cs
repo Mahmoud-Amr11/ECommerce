@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceAbstraction;
-using Shared.IdentityDto;
+using Shared.DataTransferObject.IdentityDto;
 using System.Security.Claims;
 
 namespace Presentation.Controllers
@@ -63,10 +63,6 @@ namespace Presentation.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            return Ok("Authentication Controller is working!");
-
-        }
+       
     }
 }

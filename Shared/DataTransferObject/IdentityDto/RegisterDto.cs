@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shared.IdentityDto
+namespace Shared.DataTransferObject.IdentityDto
 {
     public class RegisterDto {
         [EmailAddress]

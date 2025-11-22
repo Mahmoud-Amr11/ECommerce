@@ -1,4 +1,4 @@
-﻿using Shared.IdentityDto;
+﻿using Shared.DataTransferObject.IdentityDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
