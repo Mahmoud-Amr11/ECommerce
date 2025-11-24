@@ -31,7 +31,7 @@ namespace Service
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<Func<IOrderService>>(provider => () => provider.GetRequiredService<IOrderService>());
 
-
+            services.AddScoped<ICacheService, CacheService>();
             return services;
         }
         public static IServiceCollection AddJWTService(this IServiceCollection services, IConfiguration configuration)
