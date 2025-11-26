@@ -2,12 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceAbstraction;
 using Shared.DataTransferObject.OrderDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {

@@ -8,19 +8,21 @@ namespace DomainLayer.Models.OrderModules
         {
             
         }
-        public Order(string userEmail, OrderAddress address, DeliveryMethod deliveryMethod, ICollection<OrderItem> items, decimal subTotal)
+        public Order(string userEmail, OrderAddress address, DeliveryMethod deliveryMethod, ICollection<OrderItem> items, decimal subTotal, string paymentIntendId = null)
         {
-            UserEmail = userEmail;           
+            UserEmail = userEmail;
             Address = address;
-            DeliveryMethod=deliveryMethod;
+            DeliveryMethod = deliveryMethod;
             Items = items;
             SubTotal = subTotal;
+            PaymentIntendId = paymentIntendId;
         }
 
         public string UserEmail { get; set; } = default!;
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
         public OrderAddress Address { get; set; } = default!;
         public DeliveryMethod DeliveryMethod{ get; set; }=default!;
+        public string PaymentIntendId { get; set; }
         public int DeliveryMethodId { get; set; }
         public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
         public ICollection<OrderItem> Items { get; set; } = [];
