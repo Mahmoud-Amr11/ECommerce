@@ -18,7 +18,7 @@ namespace Service
             services.AddAutoMapper(config => config.AddProfile(new ProductProfile()), typeof(AssemblyReference).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-            services.AddScoped<IServiceManager, ServiceManagerWithFactoryDelegate>();
+            services.AddScoped<IServiceManager, ServiceManager>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<Func<IProductService>>(provider => () => provider.GetRequiredService<IProductService>());
 
@@ -39,17 +39,17 @@ namespace Service
             services.AddAuthentication((config) =>
             {
                 config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                config.DefaultChallengeScheme= JwtBearerDefaults.AuthenticationScheme;
+                config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidIssuer = configuration["JWTOptions:Issuer"],
-                  
+
                     ValidateAudience = true,
                     ValidAudience = configuration["JWTOptions:Audience"],
-                    
+
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWTOptions:SecretKey"])),

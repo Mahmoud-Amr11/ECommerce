@@ -4,9 +4,10 @@ namespace ServiceAbstraction
 {
     public interface IServiceManager
     {
-         IProductService ProductService { get; }
-         IBasketService BasketService { get; }
+        IProductService ProductService { get; }
+        IBasketService BasketService { get; }
         IAuthenticationService AuthenticationService { get; }
         IOrderService OrderService { get; }
+        IPaymentService PaymentService { get; }
     }
 }

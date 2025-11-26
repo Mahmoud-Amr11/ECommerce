@@ -8,7 +8,7 @@ namespace Service
         ,Func<IAuthenticationService> authFactory
         ,Func<IOrderService> orderFactory
 
-        ) : IServiceManager
+        ) 
     {
         public IProductService ProductService => productFactory.Invoke();
 

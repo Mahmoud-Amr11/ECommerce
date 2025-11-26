@@ -14,11 +14,14 @@ namespace Service
         private readonly Lazy<IBasketService> _basketService = new Lazy<IBasketService>(() => new BasketService(mediator));
         private readonly Lazy<IAuthenticationService> _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(_userManager, _configuration, _mapper));
         private readonly Lazy<IOrderService> _orderService = new Lazy<IOrderService>(() => new OrderService(_mapper, _basketRepository, _unitOfWork));
+        private readonly Lazy<IPaymentService> _paymentService = new Lazy<IPaymentService>(() => new PaymentService(_configuration, _unitOfWork, _basketRepository, _mapper));
         public IProductService ProductService => _productService.Value;
 
         public IBasketService BasketService => _basketService.Value;
 
         public IAuthenticationService AuthenticationService => _authenticationService.Value;
         public IOrderService OrderService => _orderService.Value;
+
+        public IPaymentService PaymentService => _paymentService.Value;
     }
 }
